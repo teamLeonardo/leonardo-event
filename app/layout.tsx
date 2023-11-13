@@ -73,19 +73,20 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <meta name="theme-color" media="(prefers-color-scheme: light)" content="#fff" />
       <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#000" />
       <link rel="alternate" type="application/rss+xml" href="/feed.xml" />
-      <body className="bg-white text-black antialiased dark:bg-gray-950 dark:text-white">
+      <body className="text-black antialiased bg-white dark:bg-gray-950 dark:text-white [transition:.5s] p-0 m-0">
+
         <ThemeProviders>
           <Analytics analyticsConfig={siteMetadata.analytics as AnalyticsConfig} />
           <SectionContainer>
-            <div className="flex h-screen flex-col justify-between font-sans">
-              <SearchProvider searchConfig={siteMetadata.search as SearchConfig}>
-                <Header />
-                <main className="mb-auto">{children}</main>
-              </SearchProvider>
-              <Footer />
-            </div>
+            <main className="font-sans min-h-screen md:pr-[28%] 
+      md:pl-[28%]">
+              {children}
+            </main>
+            <Footer />
+
           </SectionContainer>
         </ThemeProviders>
+
       </body>
     </html>
   )

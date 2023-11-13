@@ -2,6 +2,27 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --highlightColor: #9affa4;
+  --textColor0: #d4d4d4;
+  --textColor1: #8b8b8b;
+  --accentColor0: #232323;
+  --accentColor1: #3c3c3c;
+  --accentColor2: #676767;
+  --backgroundColor: #1c1c1c;
+  --shadowColor: #181818;
+}
+
+.footerMain {
+  -webkit-user-select: none;
+  user-select: none;
+  border: none;
+  border-top: 1px solid transparent;
+  border-image-slice: 1;
+  
+  @apply [border-image:linear-gradient(90deg,#ffffff_20%,#999999_50%,#ffffff_80%)_30] dark:[border-image:linear-gradient(90deg,#030712_20%,#2A3C65_50%,#030712_80%)_30] bg-[linear-gradient(90deg,#ffffff_25%,#f1f1f1,#ffffff_75%)] dark:bg-[linear-gradient(90deg,#030712_25%,#071028,#030712_75%)];
+}
+
 .task-list-item::before {
   @apply hidden;
 }
