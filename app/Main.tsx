@@ -1,5 +1,5 @@
+import { Logo } from '@/components/social-icons/icons'
 import headerNavLinks from '@/data/headerNavLinks'
-import Image from 'next/image'
 import Link from 'next/link'
 
 // flex flex-wrap flex-col justify-between sm:flex-row sm:justify-center items-center md:
@@ -7,17 +7,8 @@ export default function Home({ posts }) {
   return (
     <div className="h-screen flex justify-between items-center -mb-[55px] px-12 sm:px-0">
       <div className="relative">
-        <Image
-          src="/static/images/LSME.png"
-          alt="501A Logo Symbol" 
-          className="sm:-ml-[15px] 
-          w-[100px] 
-          [transition:.5s] 
-          brightness-[0]
-          dark:brightness-[1]
-          "
-          width={100}
-          height={100}
+        <Logo 
+          className={`fill-current text-gray-700 hover:text-primary-500 dark:text-gray-200 dark:hover:text-primary-400 h-32`}
         />
       </div>
       <div className="grid grid-cols-[1fr] gap-[.3em]">

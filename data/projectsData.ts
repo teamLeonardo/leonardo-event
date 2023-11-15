@@ -1,20 +1,28 @@
 const projectsData = [
   {
-    title: 'A Search Engine',
-    description: `What if you could look up any information in the world? Webpages, images, videos
-    and more. Google has many features to help you find exactly what you're looking
-    for.`,
-    imgSrc: '/static/images/google.png',
-    href: 'https://www.google.com',
+    title: 'Aplicacion WAMbot',
+    description: `WhatsAppMasterBot es una herramienta revolucionaria que automatiza WhatsApp, 
+    simplifica las conversaciones, permite el envío masivo y personaliza mensajes para mejorar 
+    la productividad y el compromiso.`,
+    imgSrc: '/static/images/wambor-page.png',
+    href: 'https://wambot-beta.vercel.app/',
   },
   {
-    title: 'The Time Machine',
-    description: `Imagine being able to travel back in time or to the future. Simple turn the knob
-    to the desired date and press "Go". No more worrying about lost keys or
-    forgotten headphones with this simple yet affordable solution.`,
-    imgSrc: '/static/images/time-machine.jpg',
-    href: '/blog/the-time-machine',
+    title: 'Dota 2 - Interface clon ',
+    description: `¡Hola a todos! Hoy quiero compartirles un proyecto que me entusiasma mucho. ¿Alguna vez se
+     han preguntado cómo sería llevar la interfaz de un juego como "Dota 2" al mundo de las tecnologías web?
+      Bueno, eso precisamente fue lo que me inspiró a emprender este desafío.`,
+    imgSrc: '/static/images/dota-clone.png',
+    href: 'https://react-dota2.vercel.app/',
   },
+  {
+    title: 'Aliexpress clone Landing Page',
+    description: `¡Hola a todos! Hoy quiero compartirles un proyecto que me entusiasma mucho. ¿Alguna vez se
+     han preguntado cómo sería llevar la interfaz de un juego como "Dota 2" al mundo de las tecnologías web?
+      Bueno, eso precisamente fue lo que me inspiró a emprender este desafío.`,
+    // imgSrc: '/static/images/dota-clone.png',
+    href: 'https://aliexpress-next-mlsfeqmyo-teamleonardo.vercel.app/',
+  }
 ]
 
 export default projectsData
