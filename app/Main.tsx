@@ -1,4 +1,5 @@
 import headerNavLinks from '@/data/headerNavLinks'
+import Image from 'next/image'
 import Link from 'next/link'
 
 // flex flex-wrap flex-col justify-between sm:flex-row sm:justify-center items-center md:
@@ -6,7 +7,7 @@ export default function Home({ posts }) {
   return (
     <div className="h-screen flex justify-between items-center -mb-[55px] px-12 sm:px-0">
       <div className="relative">
-        <img
+        <Image
           src="/static/images/LSME.png"
           alt="501A Logo Symbol" 
           className="sm:-ml-[15px] 
@@ -15,6 +16,8 @@ export default function Home({ posts }) {
           brightness-[0]
           dark:brightness-[1]
           "
+          width={100}
+          height={100}
         />
       </div>
       <div className="grid grid-cols-[1fr] gap-[.3em]">
