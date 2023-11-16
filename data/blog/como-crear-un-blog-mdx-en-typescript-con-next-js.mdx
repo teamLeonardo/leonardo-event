@@ -6,9 +6,268 @@ draft: false
 summary: Sigue este tutorial paso a paso y construye un blog basado en archivos con mdx-remote en Next.js. ¡Incluye ejemplos de código!
 ---
 
-A sample post with markdown.
+Sigue este tutorial paso a paso y construye un blog basado en archivos con mdx-remote en Next.js. ¡Incluye ejemplos de código!
 
-## Inline Highlighting
+![GitHub Logo](/static/images/banner-mdx.webp)
 
-Sample of inline highlighting `sum = parseInt(num1) + parseInt(num2)`
+MDX es una poderosa combinación de Markdown y componentes de React que te permite crear contenido dinámico e interactivo. Esto la convierte en el lenguaje de marcado perfecto para crear un blog. Next.js soporta nativamente MDX, ¡así que usemos ambos y creemos un blog MDX en TypeScript con Next.js!
 
+Al final de este tutorial, sabrás cómo construir el siguiente blog basado en MDX en Next.js y TypeScript. Aquí puedes ver una demostración en vivo de cómo se vería la aplicación.
+
+¡Sumergámonos en el mundo de MDX en Next.js!
+
+## ¿Qué es MDX?
+
+MDX, abreviatura de Markdown eXtended, es un lenguaje de marcado que admite el uso de JSX dentro de documentos de Markdown. En otras palabras, MDX combina la simplicidad de Markdown con el poder de los componentes de React. Esto te permite crear contenido interactivo sin esfuerzo.
+
+Así es cómo se ve un ejemplo de MDX:
+
+```md
+import SomeComponent from './SomeComponent';
+
+# Mi entrada de blog en MDX
+
+Aquí hay algo de texto para mi entrada de blog. Puedo incluir componentes de React de esta manera:
+
+<SomeComponent prop1="valor1" prop2="valor2" />
+
+También puedo incluir Markdown regular:
+
+## Título de la sección
+
+- Elemento de lista 1
+- Elemento de lista 2
+- Elemento de lista 3
+```
+
+Normalmente, MDX se utiliza para contenido que requiere tanto un formato enriquecido como interactividad, como documentación o entradas de blog. Al permitir que los componentes de React se incorporen directamente en un documento de Markdown, MDX simplifica la creación de contenido dinámico que sería difícil de lograr con Markdown simple.
+
+MDX es compatible con varias bibliotecas y marcos, como Next.js, Gatsby, Nuxt y otros generadores de sitios estáticos. También es respaldado por sitios de documentación populares como Storybook y Docz.
+
+## Markdown/MDX en Next.js
+
+Next.js es un marco de trabajo popular para construir aplicaciones web del lado del servidor con React. Específicamente, cuenta con soporte incorporado para Markdown y MDX a través de varias herramientas, incluyendo next-mdx-remote. Este paquete desarrollado por la comunidad permite obtener contenido de Markdown o MDX directamente dentro de `getStaticProps() o getStaticPaths()` sin necesidad de configuración adicional.
+
+Con `next-mdx-remote`, puedes cargar contenido MDX desde una variedad de fuentes, incluyendo archivos locales, URL remotas o una base de datos. El paquete también cuenta con un potente renderizador de MDX. Este es capaz de transformar el contenido MDX en componentes de React y puede configurarse con componentes de interfaz personalizados.
+
+Echa un vistazo a la documentación oficial para obtener más información sobre cómo usar Markdown y MDX. ¡Ahora es el momento de aprender cómo construir un blog basado en archivos MDX en TypeScript con Next.js!
+
+# Construyendo un Blog en MDX con Next.js y TypeScript
+
+Antes de comenzar, asegúrate de tener npm 18+ instalado en tu máquina. De lo contrario, descárgalo desde aquí.
+
+¡Sigue este tutorial paso a paso y aprende cómo construir un blog basado en MDX con TS en Next.js!
+
+#### Configura un proyecto TypeScript en Next.js
+Next.js soporta oficialmente TypeScript. Ejecuta el siguiente comando en la terminal para crear un nuevo proyecto de Next.js con TypeScript:
+
+```Shell
+npx create-next-app@latest --ts
+```
+Se te harán algunas preguntas. Responde de la siguiente manera:
+```Bash
+√ What is your project named? ... nextjs-markdown-blog
+√ Would you like to use ESLint with this project? ... Yes
+√ Would you like to use `src/` directory with this project? ... No
+√ Would you like to use experimental `app/` directory with this project? ... No
+√ What import alias would you like configured? ... @/*
+```
+Esto inicializará un proyecto de Next.js con TS dentro del directorio `nextjs-markdown-blog`. Ingresa a la carpeta en la terminal y ejecuta la aplicación de demostración de Next.js con:
+```Bash
+cd nextjs-markdown-blog
+npm run dev 
+```
+Si todo salió como se esperaba, deberías estar viendo la vista predeterminada de Create Next App a continuación:
+
+![Mountains](/static/images/post-mdx-next13.png)
+
+¡Genial! Ahora tienes un proyecto de Next.js listo para convertirse en un blog MDX. ¡Sigue leyendo y aprende cómo hacerlo!
+
+#### Llena tu blog con algunos archivos MDX
+Tu blog estará compuesto por artículos leídos desde archivos MDX. Crea una carpeta `_posts` en tu proyecto y llénala con algunos artículos .mdx. Si careces de imaginación o tiempo, puedes usar un generador de Lorem Ipsum o pedirle a ChatGPT que genere algo de contenido por ti.
+
+Así es cómo podría lucir un archivo de entrada de blog llamado `top-programming-languages.mdx`:
+
+```md
+---
+title: Los 5 Mejores Lenguajes de Programación para Aprender
+description: Una breve descripción de los lenguajes de programación más demandados que deberías considerar aprender en el 2023 para mantenerte al tanto en la industria tecnológica.
+previewImage: https://source.unsplash.com/A-NVHPka9Rk/1920x1280
+---
+
+# Los 5 Mejores Lenguajes de Programación para Aprender
+![imagen principal](https://source.unsplash.com/A-NVHPka9Rk/1920x1280)
+
+Los lenguajes de programación son el fundamento del mundo digital, impulsando desde sitios web y aplicaciones móviles hasta análisis de datos e inteligencia artificial. Con tantos lenguajes de programación para elegir, puede ser difícil saber por dónde empezar. En este artículo, discutiremos los 5 mejores lenguajes de programación para aprender en el 2023.
+{/* omitido por brevedad... */}
+```
+
+Echa un vistazo a la sintaxis especial utilizada al comienzo del archivo para definir un `title, description y previewImage`. Eso es un frontmatter YAML. Si no estás familiarizado con este concepto, un frontmatter es una sección de metadatos encerrada entre líneas con tres guiones `---` que aparece al inicio de un documento Markdown o MDX. Normalmente, está en formato YAML y proporciona información útil para describir el contenido almacenado en el documento Markdown/MDX.
+
+Además, nota el componente HeroImage utilizado dentro del archivo `.mdx`. Ese es un componente React personalizado que se renderizará junto con el contenido contenido en el archivo MDX. Aprenderás cómo es posible esto en los próximos pasos.
+
+#### Definir los componentes MDX
+Cada elemento JSX mencionado en archivos `.mdx` debe tener un componente React respectivo en el proyecto Next.js. Agrega una carpeta `components/mdx` y prepárate para escribir algunos componentes MDX personalizados. 
+Por ejemplo, este es el archivo React HeroImage mencionado anteriormente:
+
+```tsx:components/mdx/HeroImage.tsx
+import React from "react"
+import Image from "next/image"
+
+export default function HeroImage({ src, alt }: { src: string; alt: string }) {
+  return (
+    <div className={"mdx-hero-image"}>
+      <Image src={src} alt={alt} fill></Image>
+    </div>
+  )
+}
+```
+Como puedes notar, envuelve el componente de Next.js en un div personalizado que puedes estilizar según tu preferencia. En particular, `HeroImage` se encarga de representar la imagen principal asociada con cada artículo.
+
+Ten en cuenta que también puedes definir componentes de React para sobrescribir el elemento HTML por defecto utilizado por `next-mdx-remote` para renderizar contenido MDX. Por ejemplo, define un componente especial `H1` para los títulos de Markdown de la siguiente manera:
+
+```tsx:components/mdx/H1.tsx
+import React from "react"
+
+export default function H1({ children }: { children?: React.ReactNode }) {
+  return <h1 className="mdx-h1">{children}</h1>
+}
+```
+De manera similar, puedes crear un componente `H2` para los subtítulos:
+```tsx:components/mdx/H2.tsx
+import React from "react"
+
+export default function H1({ children }: { children?: React.ReactNode }) {
+  return <h1 className="mdx-h1">{children}</h1>
+}
+```
+Y un componente `P` personalizado para los párrafos de texto:
+```tsx:components/mdx/P.tsx
+import React from "react"
+
+export default function H1({ children }: { children?: React.ReactNode }) {
+  return <h1 className="mdx-h1">{children}</h1>
+}
+```
+
+Lo que tienen en común estos componentes es que se caracterizan por una clase CSS personalizada. Esto te brinda la capacidad de dar estilo a estos componentes MDX como desees, por ejemplo, con las siguientes reglas CSS en `styles/global.css`:
+
+```scss
+.mdx-h1 {
+  font-size: 52px;
+  color: #0d1d30;
+}
+
+.mdx-h2 {
+  font-size: 36px;
+  color: #0d1d30;
+}
+
+.mdx-p {
+  font-size: 20px;
+  margin-bottom: 1.5em;
+  line-height: 1.6em;
+}
+
+.mdx-hero-image {
+  position: relative;
+  width: 100%;
+  height: 600px;
+
+  img {
+    border-radius: 10px;
+    object-fit: cover;
+    object-position: center;
+  }
+}
+```
+
+Es hora de aprender cómo usar estos componentes MDX personalizados con `next-mdx-remote`.
+
+#### Renderizar MDX en Next.js
+Para añadir capacidades de renderizado de MDX en el servidor a Next.js, necesitas agregar `next-mdx-remote` a las dependencias de tu proyecto con:
+
+```Shell
+npm install next-mdx-remote
+```
+
+Ahora estás listo para crear la página de contenido dinámico de Next.js para tus entradas de blog. En detalle, utilizarás la característica de rutas dinámicas de Next.js. Esto te permite poblar una página de plantilla con el contenido MDX almacenado en cada archivo .mdx dentro del directorio `_posts`.
+
+Para lograrlo, define un archivo `[slug].ts` dentro de la carpeta `pages` de la siguiente manera:
+
+```tsx:pages/[slug].tsx
+import fs from "fs"
+import { GetStaticPropsContext, InferGetStaticPropsType } from "next"
+import { serialize } from "next-mdx-remote/serialize"
+import { MDXRemote } from "next-mdx-remote"
+import Head from "next/head"
+import H1 from "@/components/mdx/H1"
+import HeroImage from "@/components/mdx/HeroImage"
+import React from "react"
+import P from "@/components/mdx/P"
+import H2 from "@/components/mdx/H2"
+
+export default function PostPage({ source }: InferGetStaticPropsType<typeof getStaticProps>) {
+  return (
+    <div>
+      <Head>
+        <title>{source.frontmatter.title as string}</title>
+      </Head>
+      <MDXRemote
+        {...source}
+        // specifying the custom MDX components
+        components={{
+          h1: H1,
+          h2: H2,
+          p: P,
+          HeroImage,
+        }}
+      />
+    </div>
+  )
+}
+export async function getStaticPaths() {
+  return { paths: [], fallback: "blocking" }
+}
+
+export async function getStaticProps(
+  ctx: GetStaticPropsContext<{
+    slug: string
+  }>,
+) {
+  const { slug } = ctx.params!
+
+  // retrieve the MDX blog post file associated
+  // with the specified slug parameter
+  const postFile = fs.readFileSync(`_posts/${slug}.mdx`)
+
+  // read the MDX serialized content along with the frontmatter
+  // from the .mdx blog post file
+  const mdxSource = await serialize(postFile, { parseFrontmatter: true })
+  return {
+    props: {
+      source: mdxSource,
+    },
+    // enable ISR
+    revalidate: 60,
+  }
+}
+```
+
+
+El parámetro slug leído de la URL de la página por Next.js se pasa a `getStaticProps()`, donde se utiliza para cargar el archivo correspondiente `_posts[slug].mdx`. 
+Luego, su contenido MDX se convierte en JSX mediante la función `serialize()` expuesta por `next-mdx-remote`. 
+Observa la configuración `parseFrontmatter` establecida en true para analizar también el frontmatter contenido en el archivo `.mdx`.
+
+Finalmente, el objeto resultante se pasa al componente `PostPage` del lado del servidor. Aquí, el componente parser MDXRemote proporcionado por `next-mdx-remote` recibe la fuente serializada y la lista de componentes personalizados MDX, utilizándolos para renderizar la entrada del blog en HTML.
+
+Dado que es probable que las entradas del blog se actualicen con el tiempo, deberías usar el enfoque de Regeneración Estática Incremental (ISR, por sus siglas en inglés). Esto se habilita a través de la opción revalidate y permite que las páginas estáticas se actualicen de manera incremental sin requerir una reconstrucción completa de la aplicación Next.js.
+
+Supongamos que tienes un archivo `top-programming-languages.mdx` dentro de `_posts`. Inicia tu aplicación Next.js y visita la página `http://localhost:3000/blog/top-programming-languages` en el navegador. En este caso, slug contendrá la cadena `"top-programming-languages"` y Next.js cargará el archivo `.mdx` deseado.
+
+Esto es lo que producirá Next.js:
+
+![imagen error](/static/images/banner-error-img.png)
+
+
+Este error ocurre porque `HeroImage` intenta mostrar una imagen proveniente de Unsplash, uno de los proveedores de imágenes más populares. Por defecto, la API de Next.js bloquea los dominios externos por razones de seguridad. Configura Next.js para trabajar con Unsplash actualizando el archivo next.config.js con lo siguiente:
