@@ -17,9 +17,7 @@ const projectsData = [
   },
   {
     title: 'Aliexpress clone Landing Page',
-    description: `¡Hola a todos! Hoy quiero compartirles un proyecto que me entusiasma mucho. ¿Alguna vez se
-     han preguntado cómo sería llevar la interfaz de un juego como "Dota 2" al mundo de las tecnologías web?
-      Bueno, eso precisamente fue lo que me inspiró a emprender este desafío.`,
+    description: `¡Creé un clon de la página principal de AliExpress utilizando tecnologías como Next.js, React y Tailwind CSS. El desafío fue capturar la esencia y la funcionalidad de la plataforma en un sitio dinámico y responsivo. A través de la estructura sólida de Next.js, la flexibilidad de React para componentes interactivos y el diseño ágil con Tailwind CSS, logré recrear una experiencia similar a la original.`,
     // imgSrc: '/static/images/dota-clone.png',
     href: 'https://aliexpress-next-mlsfeqmyo-teamleonardo.vercel.app/',
   }
