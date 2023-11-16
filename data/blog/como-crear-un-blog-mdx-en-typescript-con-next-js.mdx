@@ -1,14 +1,15 @@
 ---
 title: Cómo crear un blog MDX en TypeScript con Next.js
-date: '2023-11-15'
+date: '2023-11-16'
 tags: ['markdown', "NEXT-JS", "MDX" , "NEXT13"]
 draft: false
+images: ['/static/images/Banner-MDX-NEXT.png']
 summary: Sigue este tutorial paso a paso y construye un blog basado en archivos con mdx-remote en Next.js. ¡Incluye ejemplos de código!
 ---
 
 Sigue este tutorial paso a paso y construye un blog basado en archivos con mdx-remote en Next.js. ¡Incluye ejemplos de código!
 
-![GitHub Logo](/static/images/banner-mdx.webp)
+![GitHub Logo](/static/images/Banner-MDX-NEXT.png)
 
 MDX es una poderosa combinación de Markdown y componentes de React que te permite crear contenido dinámico e interactivo. Esto la convierte en el lenguaje de marcado perfecto para crear un blog. Next.js soporta nativamente MDX, ¡así que usemos ambos y creemos un blog MDX en TypeScript con Next.js!
 
@@ -16,6 +17,7 @@ Al final de este tutorial, sabrás cómo construir el siguiente blog basado en M
 
 ¡Sumergámonos en el mundo de MDX en Next.js!
 
+Repo: https://github.com/Tonel/nextjs-mdx-typescript-blog 
 ## ¿Qué es MDX?
 
 MDX, abreviatura de Markdown eXtended, es un lenguaje de marcado que admite el uso de JSX dentro de documentos de Markdown. En otras palabras, MDX combina la simplicidad de Markdown con el poder de los componentes de React. Esto te permite crear contenido interactivo sin esfuerzo.
@@ -269,5 +271,220 @@ Esto es lo que producirá Next.js:
 
 ![imagen error](/static/images/banner-error-img.png)
 
+Este error ocurre porque `HeroImage` intenta mostrar una imagen proveniente de Unsplash, uno de los proveedores de imágenes más populares.
+Por defecto, la API de Next.js bloquea los dominios externos por razones de seguridad. Configura Next.js para trabajar con Unsplash actualizando el archivo `next.config.js` con lo siguiente:
 
-Este error ocurre porque `HeroImage` intenta mostrar una imagen proveniente de Unsplash, uno de los proveedores de imágenes más populares. Por defecto, la API de Next.js bloquea los dominios externos por razones de seguridad. Configura Next.js para trabajar con Unsplash actualizando el archivo next.config.js con lo siguiente:
+```js:next.config.js
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+  reactStrictMode: true,
+  images: {
+    domains: ["source.unsplash.com"],
+  },
+}
+
+module.exports = nextConfig 
+```
+Reinicia el servidor de desarrollo y visita `http://localhost:3000/blog/top-programming-languages` nuevamente. 
+Esta vez, deberías ver tu entrada de blog basada en MDX:
+
+![imagen success1](/static/images/banner-success-1.png)
+
+¡Fantástico! Aunque aún no se ve bien, ¡funciona!
+#### Añade una página de inicio
+Tu blog necesita una página de inicio elegante que contenga las últimas entradas del blog. 
+Next.js almacena la página de inicio de tu sitio en `pages/index.tsx`. 
+
+Reemplaza ese archivo con el siguiente código:
+```tsx:pages/index.tsx
+import PostCard from "@/components/PostCard"
+import { InferGetStaticPropsType } from "next"
+import fs from "fs"
+import { serialize } from "next-mdx-remote/serialize"
+import path from "path"
+import { PostPreview } from "@/types/posts"
+
+export default function Home({ postPreviews }: InferGetStaticPropsType<typeof getStaticProps>) {
+  return (
+    <div>
+      {postPreviews.map((postPreview, i) => {
+        return (
+          <div key={i}>
+            <PostCard postPreview={postPreview} />
+          </div>
+        )
+      })}
+    </div>
+  )
+}
+
+export async function getStaticProps() {
+  // get all MDX files
+  const postFilePaths = fs.readdirSync("_posts").filter((postFilePath) => {
+    return path.extname(postFilePath).toLowerCase() === ".mdx"
+  })
+
+  const postPreviews: PostPreview[] = []
+
+  // read the frontmatter for each file
+  for (const postFilePath of postFilePaths) {
+    const postFile = fs.readFileSync(`_posts/${postFilePath}`, "utf8")
+
+    // serialize the MDX content to a React-compatible format
+    // and parse the frontmatter
+    const serializedPost = await serialize(postFile, {
+      parseFrontmatter: true,
+    })
+
+    postPreviews.push({
+      ...serializedPost.frontmatter,
+      // add the slug to the frontmatter info
+      slug: postFilePath.replace(".mdx", ""),
+    } as PostPreview)
+  }
+
+  return {
+    props: {
+      postPreviews: postPreviews,
+    },
+    // enable ISR
+    revalidate: 60,
+  }
+}
+```
+
+`getStaticProps()` se encarga de cargar todos los archivos .mdx, transformarlos en objetos `PostPreview` y renderizarlos en componentes `PostCard`.
+
+Este es cómo se ve el tipo TypeScript PostPreview:
+
+```ts:types/posts.ts
+export type PostPreview = {
+  title: string
+  description: string
+  previewImage: string
+  slug: string
+}
+```
+
+Y así es como se define `PostCard`:
+```tsx
+import Link from "next/link"
+import { PostPreview } from "@/types/posts"
+
+export default function PostCard({ postPreview }: { postPreview: PostPreview }) {
+  return (
+    <div className={"post-card"} style={{ backgroundImage: `url(${postPreview.previewImage})` }}>
+      <Link href={postPreview.slug}>
+        <div className={"post-card-content"}>
+          <h2 className={"post-card-title"}>{postPreview.title}</h2>
+          <p className={"post-card-description"}>{postPreview.description}</p>
+        </div>
+      </Link>
+    </div>
+  )
+}
+```
+
+Si aplicas estilos a `PostCard` con algunas reglas de CSS, `http://localhost:3000` debería aparecer como en la imagen a continuación:
+
+![imagen success2](/static/images/banner-success-2.png)
+
+¡Bien hecho! Solo queda agregar un diseño a tu blog y darle estilo.
+#### Estiliza tu blog
+El problema principal con tu blog en este momento es que ocupa todo el ancho del área de visualización. Puedes evitarlo con un contenedor de Bootstrap. 
+
+Instala Bootstrap con:
+```Shell
+npm install bootstrap
+```
+Luego, agrega la siguiente línea a `_app.tsx`:
+
+```tsx
+import "bootstrap/dist/css/bootstrap.css"
+```
+Ahora, define un diseño de Next.js basado en Bootstrap:
+
+```tsx:components/Layout.tsx
+import React from "react"
+import Header from "@/components/Header"
+import { Inter } from "next/font/google"
+
+const inter = Inter({ subsets: ["latin"] })
+
+export default function Layout({ children }: { children?: React.ReactNode }) {
+  return (
+    <div className={inter.className}>
+      <Header />
+      <div className={"container"}>{children}</div>
+    </div>
+  )
+}
+```
+Aprovecha la API de fuentes de Next.js para establecer una fuente de Google atractiva para tu blog. 
+Además, envuelve todo el contenido debajo del componente `Header` con un div `.container` de Bootstrap.
+
+Si te preguntas, `Header` no es más que un div simple que contiene el título de tu blog:
+
+```tsx:components/Header.tsx
+import { Nunito } from "next/font/google"
+import Link from "next/link"
+
+const nunito = Nunito({ subsets: ["latin"] })
+
+export default function Header() {
+  return (
+    <div className={`header mb-4 ${nunito.className}`}>
+      <div className={"container"}>
+        <div className={"header-title mt-4"}>
+          <Link href="/">My MDX Blog in Next.js</Link>
+        </div>
+      </div>
+    </div>
+  )
+}
+```
+
+Ahora, envuelve la instancia de `Component` que contiene todo tu sitio de Next.js con `Layout`:
+
+```tsx:_app.tsx
+import "@/styles/globals.scss"
+import type { AppProps } from "next/app"
+import "bootstrap/dist/css/bootstrap.css"
+import Layout from "@/components/Layout"
+export default function App({ Component, pageProps }: AppProps) {
+  return (
+    <Layout>
+      <Component {...pageProps} />
+    </Layout>
+  )
+}
+```
+
+Como puedes ver, el archivo CSS global `styles/globals.scss` importado aquí es un archivo SASS. 
+
+SCSS es mucho más potente que CSS y facilita el estilo de tu aplicación web. 
+Next.js admite SCSS después de instalar sass con:
+
+```Shell
+npm install sass
+```
+
+¡Haz que tu blog de Next.js MDX TypeScript tenga un aspecto original y llamativo con algunas reglas de SCSS!
+
+## Reúnelo todo
+Puedes encontrar el código completo del blog basado en MDX desarrollado en TypeScript con Next.js en el repositorio de GitHub que respalda el artículo. Clónalo y lanza el blog localmente con:
+
+```Shell
+git clone https://github.com/Tonel/nextjs-mdx-typescript-blog
+cd nextjs-mdx-typescript-blog
+npm i
+npm run dev
+```
+Visita http://localhost:3000 en tu navegador y explora el blog de Next.js MDX.
+
+## Conclusión
+En esta guía paso a paso, viste cómo crear un blog MDX con TypeScript y Next.js. Con la ayuda de MDX, puedes combinar fácilmente componentes de React con contenido Markdown, lo que facilita la creación de publicaciones de blog ricas y atractivas.
+
+Una de las mejores cosas de usar MDX con Next.js es que tienes varias opciones para administrar el contenido de tu blog. Puedes usar un CMS headless para gestionar tu contenido MDX, o puedes actualizar archivos .mdx directamente en GitHub. Independientemente del enfoque que elijas, MDX te permitirá crear la entrada de blog que se ajuste a tus necesidades.
+
+¡Gracias por leer! ¡Esperamos que hayas encontrado útil este artículo!
