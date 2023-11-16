@@ -3,7 +3,7 @@ const siteMetadata = {
   title: 'Leonardo event',
   author: 'Leonardo Sifuentes Mozombite',
   headerTitle: 'LeonardoEvent',
-  description: 'Blog | Portafolio | ',
+  description: 'Blog | Portafolio personal',
   language: 'es',
   theme: 'system', // system, dark or light
   siteUrl: 'https://leonardo-event.vercel.app',
