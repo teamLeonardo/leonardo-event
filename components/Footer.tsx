@@ -50,8 +50,8 @@ export default function Footer() {
 
       <div className="flex items-center gap-[.5em]">
         <ThemeSwitch />
-        <select className="cursor-pointer text-[small] rounded-[5px] px-[.2em] py-[.1em] outline-[none] text-[var(--textColor0)] bg-[var(--accentColor1)] border-[1px] border-solid border-[var(--accentColor1)]" >
-          <option value="english">English</option>
+        <select disabled className="disabled:cursor-no-drop cursor-pointer text-[small] rounded-[5px] px-[.2em] py-[.1em] outline-[none] text-[var(--textColor0)] bg-[var(--accentColor1)] border-[1px] border-solid border-[var(--accentColor1)]" >
+          <option value="english">Español</option>
           <option value="japanese">日本語</option>
         </select>
       </div>
