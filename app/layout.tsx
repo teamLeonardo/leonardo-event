@@ -78,8 +78,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <ThemeProviders>
           <Analytics analyticsConfig={siteMetadata.analytics as AnalyticsConfig} />
           <SectionContainer>
-            <main className="font-sans min-h-screen md:pr-[28%] 
-      md:pl-[28%]">
+            <main className="font-sans min-h-screen px-4 md:px-[28%]">
               {children}
             </main>
             <Footer />

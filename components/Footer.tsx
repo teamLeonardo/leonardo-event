@@ -35,11 +35,10 @@ export default function Footer() {
       flex 
       items-center 
       justify-between 
-      px-0 
+      px-[2rem]
       py-[1em] 
       bottom-0
-      md:pr-[28%] 
-      md:pl-[28%]
+      md:px-[28%]
       "
     >
       <span className="text-[12px] flex ">
