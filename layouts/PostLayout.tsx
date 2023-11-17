@@ -57,7 +57,7 @@ export default function PostLayout({ content, authorDetails, next, prev, childre
           </header>
           <div className="relative">
             <div className='grid grid-rows-[auto_1fr] max-w-[200px] divide-y relative sm:fixed sm:right-[100px]'>
-              <dl className="pb-10 pt-6 xl:border-b xl:border-gray-200 xl:pt-11 xl:dark:border-gray-700">
+              <dl className="pb-10 pt-6 xl:border-b hidden lg:block xl:border-gray-200 xl:pt-11 xl:dark:border-gray-700">
                 <dt className="sr-only">Authors</dt>
                 <dd>
                   <ul className="flex flex-wrap justify-center gap-4 sm:space-x-12 xl:block xl:space-x-0 xl:space-y-8">
@@ -92,7 +92,7 @@ export default function PostLayout({ content, authorDetails, next, prev, childre
                   </ul>
                 </dd>
               </dl>
-              <footer className='hidden md:block'>
+              <footer className='hidden lg:block'>
                 <div className="divide-gray-200 text-sm font-medium leading-5 dark:divide-gray-700 xl:col-start-1 xl:row-start-2 xl:divide-y">
                   {tags && (
                     <div className="py-4 xl:py-8">

@@ -88,9 +88,9 @@ export default function ListLayoutWithTags({
           h-full max-h-[80vh] min-w-[280px] 
           max-w-[280px] flex-wrap overflow-auto rounded bg-gray-50 pt-5 
           shadow-md dark:bg-gray-900/70 dark:shadow-gray-800/40 
-          sm:flex
-          sm:fixed
-          sm:left-[100px]
+          xl:flex
+          xl:fixed
+          xl:left-[100px]
           "
           >
             <div className="px-6 py-4">

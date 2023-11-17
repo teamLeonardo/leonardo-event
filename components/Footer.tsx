@@ -38,7 +38,8 @@ export default function Footer() {
       px-[2rem]
       py-[1em] 
       bottom-0
-      md:px-[28%]
+      md:px-[15%]
+      lg:px-[28%]
       "
     >
       <span className="text-[12px] flex ">
