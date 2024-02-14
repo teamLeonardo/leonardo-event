@@ -81,6 +81,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <SectionContainer>
             <main className="font-sans min-h-screen px-4 md:px-[15%] lg:px-[28%]">
               {children}
+            
             </main>
             <Footer />
 

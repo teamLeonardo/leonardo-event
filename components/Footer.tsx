@@ -42,6 +42,12 @@ export default function Footer() {
       lg:px-[28%]
       "
     >
+      <iframe
+        className="absolute bottom-10 right-10"
+        src="https://player.twitch.tv/?channel=leonardoevent&muted=true&parent=wh5kzj.csb.app&parent=leonardo-event.vercel.app&parent=localhost"
+        allowFullScreen
+      />
+    
       <span className="text-[12px] flex ">
         {useq === "/" ? "Leonardo Event" : (
           renderListUrl()

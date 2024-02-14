@@ -112,10 +112,10 @@ export default function ListLayout({
         </div>
         <ul>
           {!filteredBlogPosts.length && 'No posts found.'}
-          {displayPosts.map((post) => {
+          {displayPosts.map((post, idx) => {
             const { path, date, title, summary, tags } = post
             return (
-              <li key={path} className="py-4">
+              <li key={path + idx} className="py-4">
                 <article className="space-y-2 xl:grid xl:grid-cols-4 xl:items-baseline xl:space-y-0">
                   <dl>
                     <dt className="sr-only">Published on</dt>
