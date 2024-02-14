@@ -70,7 +70,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <link rel="manifest" href="/static/favicons/site.webmanifest" />
       <link rel="mask-icon" href="/static/favicons/logo.svg" color="#5bbad5" />
       <meta name="msapplication-TileColor" content="#000000" />
-      <meta httpEquiv="X-UA-Compatible" content="ie=edge" />
       <meta name="theme-color" media="(prefers-color-scheme: light)" content="#fff" />
       <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#000" />
       <link rel="alternate" type="application/rss+xml" href="/feed.xml" />
@@ -81,10 +80,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <SectionContainer>
             <main className="font-sans min-h-screen px-4 md:px-[15%] lg:px-[28%]">
               {children}
-            
             </main>
             <Footer />
-
           </SectionContainer>
         </ThemeProviders>
 
