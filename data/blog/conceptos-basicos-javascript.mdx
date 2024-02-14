@@ -1,0 +1,153 @@
+---
+title: Conceptos Básicos de JavaScript
+date: '2024-02-14'
+tags: ["JavaScript"]
+draft: false
+# images: ['/static/images/Banner-MDX-NEXT-min.png']
+summary: Aquí tienes una breve explicación de los puntos incluidos en "Conceptos Básicos de JavaScript".
+---
+
+<TOCInline toc={props.toc} exclude="Introduction" />
+
+# Declaración de Variables
+
+En JavaScript, puedes declarar variables utilizando las palabras clave `var, let, o const`. Aunque `var` aún se utiliza, `let` y `const` son preferibles en situaciones más modernas.
+
+- **var:** Se utiliza para declarar variables. Sin embargo, tiene un alcance de función y puede llevar a comportamientos no deseados, por lo que se recomienda evitar su uso en situaciones modernas.
+
+- **let:** Introducido en ECMAScript 6 (ES6), `let` permite declarar variables con un alcance limitado al bloque en el que se definen. Esto ayuda a evitar problemas de alcance.
+
+- **const:** También introducido en ES6, const se utiliza para declarar variables cuyo valor no cambiará. Es una buena práctica utilizar const siempre que sea posible para evitar cambios inesperados.
+
+
+```JavaScript
+// Uso de var (evitar en situaciones modernas)
+var nombre = "John";
+
+// Uso de let
+let edad = 25;
+
+// Uso de const
+const pi = 3.1415;
+```
+
+**Asignación de Valores:**
+Puedes asignar valores a las variables durante o después de la declaración.
+
+
+```JavaScript
+let cantidad = 10;  // Asignación durante la declaración
+let precio;
+precio = 20;        // Asignación después de la declaración
+```
+# Tipos de Datos
+Las variables pueden contener diferentes tipos de datos:
+
+
+
+```JavaScript
+// Cadenas de Texto (String):
+let nombre = "Alice";
+
+// Números (Number):
+let edad = 30;
+
+// Booleanos (Boolean):
+let esMayor = true;
+
+// Arreglos (Array):
+let frutas = ["manzana", "plátano", "uva"];
+
+// Objetos (Object):
+let persona = { nombre: "Carlos", edad: 28 };
+
+// Ejemplo de Uso:
+let mensaje = "Hola, " + nombre + ". Tienes " + edad + " años.";
+console.log(mensaje);      
+```
+
+```
+Hola, Alice. Tienes 30 años.
+```
+
+
+# Operadores Aritméticos:
+Estos operadores realizan operaciones matemáticas básicas:
+
+- **Suma (`+`) :** Suma dos valores.
+```javascript
+let resultado = 5 + 3;  // resultado es 8
+```
+- **Resta (`-`) :** Resta el segundo valor del primero.
+```javascript
+let resultado = 7 - 4;  // resultado es 3
+```
+- **Multiplicación (`*`) :** Multiplica dos valoresprimero.
+```javascript
+let resultado = 6 * 2;  // resultado es 12
+```
+- **División (`/`) :** Divide el primer valor por el segundo.
+```javascript
+let resultado = 10 / 2;  // resultado es 5
+```
+- **Módulo (`%`) :** Devuelve el resto de la división.
+```javascript
+let resto = 15 % 4;  // resto es 3
+```
+
+
+# Operadores de Asignación:
+Estos operadores se utilizan para asignar valores a variables:
+
+- **Asignación (`=`) :** Asigna el valor a la variable.
+```javascript
+let edad = 25;
+```
+- **Operadores de Asignación con Operación (`+=`, `-=`, `*=`, `/=`) :** Realizan una operación y asignan el resultado a la variable.
+```javascript
+let numero = 10;
+numero += 5;  // número ahora es 15
+```
+
+
+# Operadores de Comparación:
+Estos operadores comparan dos valores y devuelven un valor booleano (`true` o `false`):
+
+
+- **Igualdad (`==`) :** Compara si dos valores son iguales.
+```javascript
+let a = 5;
+let b = '5';
+console.log(a == b);  // true (comparación sin tipo)
+```
+- **Igualdad Estricta (`===`) :** Compara si dos valores son iguales en valor y tipo.
+```javascript
+let a = 5;
+let b = '5';
+console.log(a === b);  // false (comparación con tipo)
+```
+- **Desigualdad (`!=`, `!==`) :** Comprueba si dos valores son desiguales.
+
+
+# Operadores Lógicos:
+Estos operadores realizan operaciones lógicas y devuelven un valor booleano:
+
+**AND (&&):** 
+    Devuelve true si ambas condiciones son verdaderas.<br/>
+**OR (||):** 
+    Devuelve true si al menos una de las condiciones es verdadera.<br/>
+**NOT (!):** 
+    Invierte el valor de la condición.<br/>
+
+```js
+let llueve = true;
+let haceFrio = false;
+
+if (llueve && !haceFrio) {
+  console.log("Lleva un paraguas, pero no hace frío.");
+} else if (llueve || haceFrio) {
+  console.log("Hace frío o está lloviendo.");
+} else {
+  console.log("No hace frío ni llueve.");
+}
+```
