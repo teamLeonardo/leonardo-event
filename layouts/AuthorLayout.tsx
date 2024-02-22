@@ -56,7 +56,7 @@ export default function AuthorLayout({ children, content }: Props) {
                 {
                   puesto: "Frontend Desarrollado",
                   empresa: "SOEN SAC.",
-                  fecha: "Enero 2023 - Agosto 2023",
+                  fecha: "Febreo 2023 - Diciembre 2023",
                   contenido: [
                     "He contribuido en el desarrollo de sistemas completos de gestión, abarcando la administración de pedidos, productos y clientes.",
                     "He implementado soluciones de seguimiento en tiempo real para pedidos, aprovechando la sinergia entre Google Maps y Firebase.",
@@ -76,7 +76,7 @@ export default function AuthorLayout({ children, content }: Props) {
                 {
                   puesto: "Desarrollador web",
                   empresa: "PLAYTEC",
-                  fecha: "Enero 2023 - Agosto 2023",
+                  fecha: "Enero 2023 - Diciembre 2023",
                   contenido: [
                     "Realización de maquetación según pautas de diseño del equipo.",
                     "Creación de componentes reutilizables en React.",
