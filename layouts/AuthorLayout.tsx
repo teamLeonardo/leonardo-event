@@ -1,4 +1,4 @@
-import { ReactNode } from 'react'
+import { Fragment, ReactNode } from 'react'
 import type { Authors } from 'contentlayer/generated'
 import SocialIcon from '@/components/social-icons'
 import Image from '@/components/Image'
@@ -19,7 +19,7 @@ export default function AuthorLayout({ children, content }: Props) {
             Sobre Mi
           </h1>
         </div>
-        <div className="items-start space-y-2 xl:grid xl:grid-cols-3 xl:gap-x-8 xl:space-y-0">
+        <div className="items-start mb-4 space-y-2 xl:grid xl:grid-cols-3 xl:gap-x-8 xl:space-y-0">
           <div className="flex flex-col items-center space-x-2 pt-8">
             {avatar && (
               <Image
@@ -58,9 +58,12 @@ export default function AuthorLayout({ children, content }: Props) {
                   empresa: "SOEN SAC.",
                   fecha: "Febreo 2023 - Diciembre 2023",
                   contenido: [
-                    "He contribuido en el desarrollo de sistemas completos de gestión, abarcando la administración de pedidos, productos y clientes.",
-                    "He implementado soluciones de seguimiento en tiempo real para pedidos, aprovechando la sinergia entre Google Maps y Firebase.",
-                    "Adicionalmente, he logrado una integración impecable de las APIs de Google y Facebook, mejorando significativamente la fluidez y eficiencia del proceso de inicio de sesión."
+                    "Desarrollo de sistemas de gestión abarcando pedidos, productos, clientes.",
+                    "Integración de seguimiento en tiempo real de pedidos con Google Maps y Firebase.",
+                    "Integración de SDK de Google y Facebook para un inicio de sesión eficiente.",
+                    "Manipulación avanzada del DOM.",
+                    "Desarrollo de diferentes pantallas para ver, crear, editar y eliminar información.",
+                    "Creación de un sistema integral para la gestión de módulos, roles, asignación de permisos y usuarios en la aplicación.",
                   ]
                 },
                 {
@@ -68,33 +71,41 @@ export default function AuthorLayout({ children, content }: Props) {
                   empresa: "Avatar Global",
                   fecha: "Julio 2021 - Diciembre 2022",
                   contenido: [
-                    "Contribución en todas las fases del desarrollo con la integración de nuevas funcionalidades.",
-                    "Mantenimiento y mejora de  aplicaciones existentes.",
-                    "Investigación de capacidades nativas de HCL Commerce para la creación de una nueva tienda mediante React.js."
+                    "Integración de nuevas funcionalidades en todas las etapas de desarrollo con un entorno de React.",
+                    "Mantenimiento y optimización de aplicaciones existentes (SEO, renderizado, velocidad de carga, accesibilidad)",
+                    "Investigación de características nativas de HCL Commerce para nueva tienda usando React.js",
+                    "Optimización Redux y Context API",
+                    "Experiencia en desarrollo de aplicaciones SPAs utilizando React.",
+                    "Maquetación basada en el diseño de Figma",
                   ]
                 },
                 {
                   puesto: "Desarrollador web",
                   empresa: "PLAYTEC",
-                  fecha: "Enero 2023 - Diciembre 2023",
+                  fecha: "Enero 2020 - Diciembre 2020",
                   contenido: [
-                    "Realización de maquetación según pautas de diseño del equipo.",
+                    "Realicé maquetación según diseño de Figma.",
                     "Creación de componentes reutilizables en React.",
-                    "Utilización de Redux para gestionar el estado de la aplicación.",
-                    "Integración de protocolos de socket y WebRTC en el cliente para mejorar la        comunicación y funcionalidad."
+                    "Contribuí al desarrollo de aplicaciones web utilizando VueJS para la creación de Web Components y SPAs Applications.",
+                    "Desarrollo de componentes reutilizables con React para la aplicación.",
+                    "Gestión del estado de la aplicación utilizando Redux.",
+                    "Integración de protocolos de socket y WebRTC en el cliente.",
+                    "Migración e integración en aplicación PWA.",
                   ]
                 },
                 {
                   puesto: "Desarrollador PHP y Visual Basic .NET",
                   empresa: "QUIPU S.A",
-                  fecha: "Mayo 2019 - Enero 2020",
+                  fecha: "Enero 2019 - Diciembre 2019",
                   contenido: [
-                    "Encargado del mantenimiento de software contable en Visual Basic y del desarrollo de soluciones web de gestión en PHP.",
-                    "Responsable de mantener bases de datos relacionales para ambos proyectos y de optimizar consultas y rendimiento en la aplicación web de gestión."
+                    "Mantenimiento de software contable desarrollado en Visual Basic.",
+                    "Creación de soluciones web de gestión mediante PHP.",
+                    "Mantenimiento de bases de datos relacionales para ambos proyectos.",
+                    "Optimización de consultas y rendimiento en la aplicación web de gestión."
                   ]
                 }
-              ].map((el) => (
-                <li>
+              ].map((el, keyAllIdx) => (
+                <li key={keyAllIdx}>
                   <div className="timeline-start">
                     <div className="text-sm font-black ">
                       {el.puesto}
@@ -110,16 +121,13 @@ export default function AuthorLayout({ children, content }: Props) {
                     <div className="text-lg font-black">
                       {el.empresa}
                     </div>
-                    <div className='dark:text-gray-400'>
-                      {el.contenido.map((cont) => (
-                        <>
-                          <span>
-                            {cont}
-                          </span>
-                          <br />
-                        </>
+                    <ul className='dark:text-gray-400 list-disc ml-5'>
+                      {el.contenido.map((cont, keyIdx) => (
+                        <li key={keyIdx}>
+                          {cont}
+                        </li>
                       ))}
-                    </div>
+                    </ul>
                   </div>
                   <hr />
                 </li>
