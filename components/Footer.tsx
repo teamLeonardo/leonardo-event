@@ -47,16 +47,16 @@ export default function Footer() {
           renderListUrl()
         )}
       </span>
-      <iframe
+      {/* <iframe
         className="absolute bottom-20 right-10"
         src="https://player.twitch.tv/?channel=leonardoevent&muted=true&parent=localhost&parent=leonardo-event.vercel.app"
         allowFullScreen
-      />
+      /> */}
       <div className="flex items-center gap-[.5em]">
         <ThemeSwitch />
-        <select disabled className="disabled:cursor-no-drop cursor-pointer text-[small] rounded-[5px] px-[.2em] py-[.1em] outline-[none] text-[var(--textColor0)] bg-[var(--accentColor1)] border-[1px] border-solid border-[var(--accentColor1)]" >
+        <select className="cursor-pointer text-[small] rounded-[5px] px-[.2em] py-[.1em] outline-[none] text-[var(--textColor0)] bg-[var(--accentColor1)] border-[1px] border-solid border-[var(--accentColor1)]" >
           <option value="english">Español</option>
-          <option value="japanese">日本語</option>
+          <option disabled value="ingles" className="disabled:cursor-no-drop">Ingles</option>
         </select>
       </div>
     </footer>
